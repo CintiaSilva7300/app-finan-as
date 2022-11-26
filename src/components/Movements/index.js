@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
+import { MotiView, AnimatePresence, MotiText } from "moti";
 
 export default function Movements({ data }) {
   const [shouValue, setShowValue] = useState(false);
@@ -17,13 +18,34 @@ export default function Movements({ data }) {
         <Text style={styles.label}>{data.label}</Text>
 
         {shouValue ? (
-          <Text style={data.type === 1 ? styles.value : styles.expenses}>
-            {/* quando for despessas a cor vai ser ao estilo de expenses */}
-            {data.type === 1 ? `R$ ${data.value}` : `R$ -${data.value}`}
-            {/* quando for despessas vai receber um sinal de negativo */}
-          </Text>
+          <AnimatePresence exitBeforeEnter>
+            <MotiText
+              style={data.type === 1 ? styles.value : styles.expenses}
+              from={{
+                translateX: 100,
+              }}
+              animate={{
+                translateX: 0,
+              }}
+              transition={{
+                type: "spring",
+                duration: 500,
+              }}
+            >
+              {/* quando for despessas a cor vai ser ao estilo de expenses */}
+              {data.type === 1 ? `R$ ${data.value}` : `R$ -${data.value}`}
+              {/* quando for despessas vai receber um sinal de negativo */}
+            </MotiText>
+          </AnimatePresence>
         ) : (
-          <View style={styles.skeleton} />
+          <AnimatePresence exitBeforeEnter>
+            <MotiView
+              style={styles.skeleton}
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "timing" }}
+            />
+          </AnimatePresence>
         )}
       </View>
     </TouchableOpacity>

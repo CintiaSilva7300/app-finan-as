@@ -26,6 +26,20 @@ const list = [
     date: "21/11/2022",
     type: 1, //receita / entrada
   },
+  {
+    id: 4,
+    label: "Pix",
+    value: 12.5,
+    date: "21/11/2022",
+    type: 0, //receita / entrada
+  },
+  {
+    id: 5,
+    label: "Pix",
+    value: 5,
+    date: "21/11/2022",
+    type: 1, //receita / entrada
+  },
 ];
 
 export default function Home() {
